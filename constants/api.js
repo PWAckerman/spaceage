@@ -1,3 +1,3 @@
-const EndPointDomain = {url: "https://5419f75d.ngrok.io"};
+const EndPointDomain = {url: "http://localhost:9000"};
 
 export default EndPointDomain;

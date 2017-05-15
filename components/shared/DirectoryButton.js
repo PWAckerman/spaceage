@@ -3,7 +3,8 @@ import {
     StyleSheet,
     Image,
     Text,
-    Animated
+    Animated,
+    TouchOpacity
 } from "react-native";
 import NavLink from "./NavLink.js";
 
@@ -14,6 +15,11 @@ class DirectoryButton extends Component{
         this.state = {
             bounceValue: new Animated.Value(0),
         };
+        this.callbackWrapper = this.callbackWrapper.bind(this);
+    }
+
+    callbackWrapper(evt){
+        this.props.callback(this.props.directory);
     }
 
     componentDidMount() {
@@ -29,7 +35,7 @@ class DirectoryButton extends Component{
 
     render(){
         return (
-            <NavLink to="/">
+            <NavLink handler={this.callbackWrapper}>
                 <Animated.View style={{
                     justifyContent: "center",
                     alignItems: "center",
@@ -44,7 +50,7 @@ class DirectoryButton extends Component{
                     transform: [{scale: this.state.bounceValue }]
                 }}>
                     <Image style={styles.directoryIcon} source={require("../../img/folder.png")}/>
-                    <Text style={{color: "#022349"}}>{this.props.name}</Text>
+                    <Text ellipsizeMode="tail" numberOfLines={1} style={{color: "#022349"}}>{this.props.name}</Text>
                 </Animated.View>
             </NavLink>
         )

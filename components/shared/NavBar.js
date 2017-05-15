@@ -3,13 +3,32 @@ import {
     StyleSheet,
     View
 } from "react-native";
+import { connect } from "react-redux";
 import DashNav from "./DashNav.js";
 
-const NavBar = ({mode = "dash"}) => (
-    <View style={styles.navBarContainer}>
-        {mode === "dash" ? <DashNav /> : null}
-    </View>
-)
+// const NavBar = ({mode = "dash"}, context) => {
+//     console.log("context", context);
+//
+// }
+
+class NavBar extends Component{
+
+    constructor(props, context){
+        super(props, context);
+    }
+
+    render(){
+        if(this.props.token){
+            return (
+                <View style={styles.navBarContainer}>
+                    <DashNav />
+                </View>
+            )
+        } else {
+            return null
+        }
+    }
+}
 
 const styles = StyleSheet.create({
     navBarContainer: {
@@ -22,4 +41,11 @@ const styles = StyleSheet.create({
     }
 });
 
-export default NavBar;
+export default connect((state)=>({
+        token: state.user.token,
+        user: state.user.user,
+        error: state.user.error
+    }),
+    (dispatch)=>({
+        //dispatch actions here
+    }))(NavBar);

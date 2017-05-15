@@ -12,6 +12,7 @@ const InputWithIcon = ({iconName, secureTextEntry, keyboardType, returnKeyType, 
         <View style={styles.inputWithIcon}>
                 <Icon style={{backgroundColor: "transparent"}} name={iconName} size={size} color={color}/>
                 <TextInput
+                    autoCapitalize="none"
                     style={styles.input}
                     placeholder={placeholder}
                     keyboardType={keyboardType || null}
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         paddingLeft: 10,
         borderRadius: 0,
-        borderColor: "rgb(255, 255, 255)"
+        borderColor: "rgba(255, 255, 255, 0)"
     },
     input: {
         flex: 1,
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         paddingLeft: 10,
         backgroundColor: "transparent",
-        color: "rgb(255, 255, 255)"
+        color: "rgba(255, 255, 255, 1)"
     },
     inputIcon: {
         padding: 20,

@@ -10,6 +10,7 @@ import PlanogramOverviewRoute from "./components/routes/PlanogramOverviewRoute.j
 import PlanogramEditorRoute from "./components/routes/PlanogramEditorRoute.js";
 import ProductListRoute from "./components/routes/ProductListRoute.js";
 import ProductDetailRoute from "./components/routes/ProductDetailRoute.js";
+import NewDirectoryRoute from "./components/routes/NewDirectoryRoute.js";
 import SignUpRoute from "./components/routes/SignUpRoute.js";
 import NavBar from "./components/shared/NavBar.js";
 import { AppRegistry, View, StyleSheet, StatusBar } from "react-native";
@@ -17,18 +18,6 @@ import { Alert } from "react-native";
 import UserService from "./services/UserService.js";
 import { Provider } from "react-redux";
 import configureStore from  "./store/createStore";
-
-const userService = new UserService();
-
-let user = userService.getUser("c5a27bfb-2629-4b5a-85ec-fcba1d9869c3");
-console.log(user);
-
-const getConfirmation = (message, callback) => {
-  Alert.alert("Confirm", message, [
-    { text: "Cancel", onPress: () => callback(false) },
-    { text: "OK", onPress: () => callback(true) }
-  ])
-}
 
 let history = createMemoryHistory({
   initialEntries: [ "/" ],
@@ -46,7 +35,7 @@ export default class Companion2 extends Component {
                 barStyle = "light-content"
             />
             <Provider store={configureStore()}>
-                <NativeRouter addressBar history={history} getUserConfirmation={getConfirmation}>
+                <NativeRouter addressBar history={history}>
                     <View style={{flex: 1}}>
                         <Switch>
                             <Route exact path="/" component={App}/>
@@ -54,6 +43,7 @@ export default class Companion2 extends Component {
                             <Route path="/dash" component={Dash}/>
                             <Route path="/planogramoverview" component={PlanogramOverviewRoute}/>
                             <Route path="/planogrameditor" component={PlanogramEditorRoute}/>
+                            <Route path="/newdirectory" component={NewDirectoryRoute}/>
                         </Switch>
                         <NavBar />
                     </View>
